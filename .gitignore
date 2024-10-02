@@ -1,2 +1,2 @@
-**/node_modules
-./backend/security/*
+**/*node_modules
+**/backend/security/** 
