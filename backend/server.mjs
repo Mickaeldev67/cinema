@@ -18,7 +18,6 @@ const credentials = { key: privateKey, cert: certificate };
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(3000, () => {
     console.log('serveur https en écoute sur le port 3000');
-    console.log(process.env.TOKEN);
 });
 
 const fetchCurrentMovie = async () => {
@@ -33,16 +32,38 @@ const fetchCurrentMovie = async () => {
     try {
         const response = await fetch(url, options);
         const data = await response.json();
+        const moviesDetails = [];
+        for (let i = 0; i < 10; i++) {
+          moviesDetails[i] = await fetchingMoviesByIds(data.results[i]);
+          console.log("movies details " + i + " : ");
+          console.log(moviesDetails[i]);
+        }
         return data;
     } catch(error) {
         console.log('error:' + error)
     }
-    
+}
+
+const fetchingMoviesByIds = async (json) => {
+  const url = 'https://api.themoviedb.org/3/movie/'+json.id+'?language=fr-FR';
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMjY1OTViNjZkMzM4ODBlYzg4Y2E0ODI3ZDY2NzI0OSIsIm5iZiI6MTcyODIyMjk4OS4wNzA2MTksInN1YiI6IjY2ZmZjN2ZiYzlhMTBkNDZlYTdjYzk4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S1OiI9QTGmQqohd81rQ2RuW2_UsRk9q0gHKo9kclf58'
+      }
+    };
+    try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        return data;
+    } catch(error) {
+        console.log('error:' + error)
+    }
 }
 
 
 app.get('/movies', async (req, res) => {
     const datalist = await fetchCurrentMovie();
-    console.log(datalist);
     res.json("oui");
 });
