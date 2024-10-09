@@ -38,9 +38,9 @@ const fetchCurrentMovie = async () => {
           console.log("movies details " + i + " : ");
           console.log(moviesDetails[i]);
         }
-        return data;
+        return moviesDetails;
     } catch(error) {
-        console.log('error:' + error)
+        console.log('error:' + error);
     }
 }
 
@@ -64,6 +64,6 @@ const fetchingMoviesByIds = async (json) => {
 
 
 app.get('/movies', async (req, res) => {
-    const datalist = await fetchCurrentMovie();
-    res.json("oui");
+    const moviesList = await fetchCurrentMovie();
+    res.send(moviesList);
 });
