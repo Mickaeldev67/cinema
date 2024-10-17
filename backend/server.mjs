@@ -67,3 +67,9 @@ app.get('/movies', async (req, res) => {
     const moviesList = await fetchCurrentMovie();
     res.send(moviesList);
 });
+
+app.get('/movie/:id', async (req, res) => {
+  const data = await fetchingMoviesByIds(req.params);
+  res.send(data);
+
+})

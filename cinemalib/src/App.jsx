@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Home from './components/Home';
 import { Routes, Route } from 'react-router-dom';
-import MoviesDetails from './components/MoviesDetails';
+import Movie from './components/Movie';
 
 function App() {
   return(
@@ -12,7 +12,7 @@ function App() {
     </h1>
       <Routes>
         <Route path='/*' element={<Home />} />
-        <Route path='/moviedetails' element={<MoviesDetails />} />
+        <Route path='/movie/:id' element={<Movie />} />
       </Routes>
     </>
   )

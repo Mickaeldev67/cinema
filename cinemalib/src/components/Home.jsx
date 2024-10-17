@@ -26,7 +26,7 @@ function Home() {
         {
           movies.map(({id, title, poster_path}) => (
             <>
-              <Link to={`/moviedetails?id=${id}`}>
+              <Link to={`/movie/${id}`}>
                 <div className='flex flex-col items-center'>
                   <img className="h-60 w-60" src={poster_path === null 
                   ? 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'  // Image par défaut si poster_path est null
